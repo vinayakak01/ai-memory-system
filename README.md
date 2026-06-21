@@ -1,5 +1,8 @@
 # Memory Agent MVP
 
+<img width="1918" height="1078" alt="image" src="https://github.com/user-attachments/assets/872515a8-92b1-4e83-9d1c-5f1e62e6ead4" />
+
+
 A minimal but polished ChatGPT-style memory assistant built with FastAPI, SQLite, sentence-transformers, and local Ollama.
 
 ## What it does

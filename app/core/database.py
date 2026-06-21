@@ -10,7 +10,7 @@ SQLITE_LOCK_RETRY_ATTEMPTS = 3
 SQLITE_LOCK_RETRY_DELAY_SECONDS = 0.2
 
 
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parents[2]
 DATA_DIR = BASE_DIR / "data"
 DATA_DIR.mkdir(exist_ok=True)
 DB_PATH = DATA_DIR / "memory_agent.db"

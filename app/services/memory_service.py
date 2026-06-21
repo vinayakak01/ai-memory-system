@@ -10,14 +10,14 @@ from typing import Iterable
 
 import numpy as np
 from sentence_transformers import SentenceTransformer
-from sqlalchemy.exc import OperationalError, SQLAlchemyError
 from sqlalchemy import select
+from sqlalchemy.exc import OperationalError, SQLAlchemyError
 from sqlalchemy.orm import Session
 
-from database import SQLITE_LOCK_RETRY_ATTEMPTS, SQLITE_LOCK_RETRY_DELAY_SECONDS
-from llm_client import OllamaClient
-from models import Memory, Message
-from schemas import MemoryView
+from app.core.database import SQLITE_LOCK_RETRY_ATTEMPTS, SQLITE_LOCK_RETRY_DELAY_SECONDS
+from app.db.models import Memory, Message
+from app.db.schemas import MemoryView
+from app.services.llm_client import OllamaClient
 
 
 SECRET_PATTERNS = [

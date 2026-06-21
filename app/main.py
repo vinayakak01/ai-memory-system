@@ -4,28 +4,19 @@ from fastapi import Depends, FastAPI, HTTPException, Request
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from pydantic_settings import BaseSettings, SettingsConfigDict
 from sqlalchemy.orm import Session
 
-from database import Base, SessionLocal, engine
-from llm_client import LLMUnavailableError, OllamaClient
-from memory_service import MemoryService
-from schemas import ChatRequest, ChatResponse, MemoryCreateRequest, MemoryView
+from app.core.database import Base, SessionLocal, engine
+from app.core.settings import settings
+from app.db.schemas import ChatRequest, ChatResponse, MemoryCreateRequest, MemoryView
+from app.services.llm_client import LLMUnavailableError, OllamaClient
+from app.services.memory_service import MemoryService
 
 
-class Settings(BaseSettings):
-    ollama_model: str = "llama3.2:3b"
-    ollama_host: str = "http://127.0.0.1:11434"
-    app_title: str = "Memory Agent MVP"
-
-    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
-
-
-settings = Settings()
 app = FastAPI(title=settings.app_title)
-frontend_dir = Path(__file__).resolve().parent / "frontend"
-templates = Jinja2Templates(directory=str(frontend_dir / "templates"))
-app.mount("/static", StaticFiles(directory=str(frontend_dir / "static")), name="static")
+web_dir = Path(__file__).resolve().parent / "web"
+templates = Jinja2Templates(directory=str(web_dir / "templates"))
+app.mount("/static", StaticFiles(directory=str(web_dir / "static")), name="static")
 
 Base.metadata.create_all(bind=engine)
 memory_service = MemoryService(OllamaClient(settings.ollama_model, settings.ollama_host))

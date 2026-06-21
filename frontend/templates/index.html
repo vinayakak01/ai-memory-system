@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title }}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="shell">
+    <section class="chat-panel">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Memory-first assistant</p>
+          <h1>Chat with a system that remembers the right things.</h1>
+        </div>
+        <div class="hero-card">
+          <span class="hero-dot"></span>
+          <span>Write path: extract -> evaluate -> store</span>
+        </div>
+      </header>
+
+      <div id="chat-feed" class="chat-feed">
+        <article class="message assistant">
+          <div class="bubble">
+            Tell me something about your preferences, projects, or goals. I will remember the useful parts and show them in the memory store.
+          </div>
+        </article>
+      </div>
+
+      <form id="chat-form" class="composer">
+        <textarea id="message-input" placeholder="Message the memory agent..." rows="1"></textarea>
+        <div class="composer-actions">
+          <button type="button" id="remember-latest" class="ghost">Remember latest</button>
+          <button type="submit" class="primary">Send</button>
+        </div>
+      </form>
+    </section>
+
+    <aside class="memory-panel">
+      <div class="memory-header">
+        <div>
+          <p class="eyebrow">Memory Store</p>
+          <h2>Durable facts and preferences</h2>
+        </div>
+        <button id="refresh-memories" class="ghost compact">Refresh</button>
+      </div>
+
+      <form id="manual-memory-form" class="manual-memory">
+        <input id="manual-memory-input" type="text" placeholder="Add a memory explicitly">
+        <select id="manual-memory-kind">
+          <option value="semantic">Semantic</option>
+          <option value="procedural">Procedural</option>
+          <option value="episodic">Episodic</option>
+        </select>
+        <button type="submit" class="primary">Remember this</button>
+      </form>
+
+      <div id="memory-list" class="memory-list"></div>
+    </aside>
+  </div>
+
+  <template id="message-template">
+    <article class="message">
+      <div class="bubble"></div>
+    </article>
+  </template>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
